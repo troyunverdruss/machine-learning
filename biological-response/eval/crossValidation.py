@@ -1,8 +1,7 @@
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import KFold
-
-import logLoss
+from logLoss import llfun
 
 
 def main():
@@ -18,7 +17,7 @@ def main():
     results = []
     for traincv, testcv in cv.split(train):
         probas = cfr.fit(train[traincv], target[traincv]).predict_proba(train[testcv])
-        results.append(logLoss.llfun(target[testcv], [x[1] for x in probas]))
+        results.append(llfun(target[testcv], [x[1] for x in probas]))
 
     print('Results: ' + str(np.array(results).mean()))
 
