@@ -34,3 +34,10 @@ def get_target(df):
 
 def get_model():
     return RandomForestClassifier(n_estimators=100, max_depth=2, random_state=0)
+
+
+def make_int(x):
+    if x >= 0.50:
+        return 1
+    else:
+        return 0

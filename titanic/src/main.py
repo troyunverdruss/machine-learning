@@ -4,13 +4,6 @@ from numpy import savetxt
 import shared
 
 
-def make_int(x):
-    if x >= 0.50:
-        return 1
-    else:
-        return 0
-
-
 def main():
     # http://nbviewer.jupyter.org/github/agconti/kaggle-titanic/blob/master/Titanic.ipynb
 
@@ -24,7 +17,7 @@ def main():
     rf = shared.get_model()
     rf.fit(train, target)
 
-    predicted_probs = [[orig_test_df['PassengerId'][index], make_int(x[1])] for index, x in
+    predicted_probs = [[orig_test_df['PassengerId'][index], shared.make_int(x[1])] for index, x in
                        enumerate(rf.predict_proba(test_df))]
 
     savetxt('out/submission.csv', predicted_probs, delimiter=',', fmt='%d,%d',
